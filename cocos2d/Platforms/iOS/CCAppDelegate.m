@@ -42,6 +42,120 @@
 // Fixed size. As wide as iPhone 5 at 2x and as high as the iPad at 2x.
 const CGSize FIXED_SIZE = {568, 384};
 
+// ---------------------------------------------------------------------------
+// ARTA fixed 4:3 canvas (launch-screen / modern iPad aspect ratios)
+//
+// After adopting a launch storyboard, UIKit reports the device's true bounds to
+// cocos2d (previously launch images made many iPads look like 1024×768). ARTA's
+// UI is authored for classic iPad points and is not responsive, so we:
+//
+//   1. Host the director inside CCLetterboxViewController so the GL surface is a
+//      centered 4:3 UIView (black bars on Mini / other non-4:3 devices).
+//   2. Adjust director.contentScaleFactor so viewSize is always {1024,768}.
+//
+// Do NOT try to letterbox by setting director.view.frame alone — the director is
+// a UIViewController, and UIKit resets its view to fill the parent every layout.
+// Likewise, do NOT set frame on the UINavigationController's view directly; it
+// re-expands to the parent VC bounds. Size a plain intermediate "stage" UIView.
+// ---------------------------------------------------------------------------
+static const CGSize kARTADesignSize = {1024.0, 768.0};
+static const CGFloat kARTAAspect = 4.0 / 3.0;
+
+/// Largest 4:3 rect centered inside `bounds` (pillarbox or letterbox as needed).
+static CGRect CCARTAAspectFitRect(CGRect bounds)
+{
+	if (bounds.size.width <= 0.0 || bounds.size.height <= 0.0) {
+		return bounds;
+	}
+
+	CGFloat ratio = bounds.size.width / bounds.size.height;
+	if (ratio > kARTAAspect + 0.01) {
+		// Wider than 4:3 (e.g. iPad Mini ~3:2) — black bars left/right
+		CGFloat w = floor(bounds.size.height * kARTAAspect);
+		return CGRectMake(floor((bounds.size.width - w) * 0.5), 0.0, w, bounds.size.height);
+	}
+	if (ratio < kARTAAspect - 0.01) {
+		// Taller than 4:3 — black bars top/bottom
+		CGFloat h = floor(bounds.size.width / kARTAAspect);
+		return CGRectMake(0.0, floor((bounds.size.height - h) * 0.5), bounds.size.width, h);
+	}
+	return bounds;
+}
+
+/**
+ Window root VC that keeps cocos2d in a centered 4:3 "stage".
+
+ Hierarchy:
+   window (black)
+     └─ CCLetterboxViewController.view (full screen, black)
+          └─ stageView (centered 4:3)
+               └─ CCNavigationController.view → CCDirectorIOS/CCGLView
+
+ See the ARTA fixed-canvas block comment above for why the intermediate stageView
+ is required.
+ */
+@interface CCLetterboxViewController : UIViewController
+@property (nonatomic, strong) UIViewController *contentViewController;
+@property (nonatomic, strong) UIView *stageView;
+- (instancetype)initWithContentViewController:(UIViewController *)contentViewController;
+@end
+
+@implementation CCLetterboxViewController
+
+- (instancetype)initWithContentViewController:(UIViewController *)contentViewController
+{
+	self = [super initWithNibName:nil bundle:nil];
+	if (self) {
+		_contentViewController = contentViewController;
+	}
+	return self;
+}
+
+- (void)viewDidLoad
+{
+	[super viewDidLoad];
+	self.view.backgroundColor = [UIColor blackColor];
+
+	// Plain UIView (not a VC view) so our frame sticks across layout passes.
+	self.stageView = [[UIView alloc] initWithFrame:CGRectZero];
+	self.stageView.backgroundColor = [UIColor blackColor];
+	self.stageView.autoresizingMask = UIViewAutoresizingNone;
+	[self.view addSubview:self.stageView];
+
+	[self addChildViewController:self.contentViewController];
+	UIView *contentView = self.contentViewController.view;
+	contentView.frame = self.stageView.bounds;
+	contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	[self.stageView addSubview:contentView];
+	[self.contentViewController didMoveToParentViewController:self];
+}
+
+- (void)viewWillLayoutSubviews
+{
+	[super viewWillLayoutSubviews];
+	// Must run in viewWillLayoutSubviews (not Did) so the nav/GL stack lays out
+	// against the 4:3 stage bounds in this same pass.
+	self.stageView.frame = CCARTAAspectFitRect(self.view.bounds);
+	self.contentViewController.view.frame = self.stageView.bounds;
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+	return YES;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+	return self.contentViewController.supportedInterfaceOrientations;
+}
+
+- (BOOL)shouldAutorotate
+{
+	return YES;
+}
+
+@end
+
 @interface CCNavigationController ()
 {
     CCAppDelegate* __weak _appDelegate;
@@ -110,6 +224,22 @@ const CGSize FIXED_SIZE = {568, 384};
 // This is not needed on iOS6 and could be added to the application:didFinish...
 -(void) directorDidReshapeProjection:(CCDirector*)director
 {
+	// ARTA: After CCLetterboxViewController gives us a 4:3 GL surface, map that
+	// surface onto the authored 1024×768 point canvas:
+	//   viewSize = viewSizeInPixels / contentScaleFactor  ⇒  {1024, 768}
+	// Without this, a letterboxed Mini (~992×744 points @2x) would report
+	// viewSize ≈ {992,744} and break hardcoded layout; a full-bleed wide screen
+	// would report width > 1024 and leave content left-aligned with empty space.
+	CGSize pixelSize = director.viewSizeInPixels;
+	if (pixelSize.width > 0 && pixelSize.height > 0) {
+		CGFloat targetCF = MIN(pixelSize.width / kARTADesignSize.width,
+							   pixelSize.height / kARTADesignSize.height);
+		if (fabs(director.contentScaleFactor - targetCF) > 0.001) {
+			director.contentScaleFactor = targetCF;
+			[director setProjection:director.projection];
+		}
+	}
+
 	if(director.runningScene == nil) {
 		// Add the first scene to the stack. The director will draw it immediately into the framebuffer. (Animation is started automatically when the view is displayed.)
 		// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
@@ -149,9 +279,13 @@ FindPOTScale(CGFloat size, CGFloat fixedSize)
 	if (!window_) {
 		window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	}
-	
+
+	window_.backgroundColor = [UIColor blackColor]; // shows through letterbox bars
+
+	// GL view frame is only a placeholder; CCLetterboxViewController re-parents the
+	// nav stack into a centered 4:3 stage on layout (see ARTA fixed-canvas notes).
 	CGRect bounds = [window_ bounds];
-	
+
 	// CCView creation
 	// viewWithFrame: size of the OpenGL view. For full screen use [_window bounds]
 	//  - Possible values: any CGRect
@@ -186,7 +320,9 @@ FindPOTScale(CGFloat size, CGFloat fixedSize)
 #endif
 		default: NSAssert(NO, @"Internal error: Graphics API not set up.");
 	}
-	
+
+	[ccview setAutoresizingMask:(UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight)];
+
 	CCDirectorIOS* director = (CCDirectorIOS*) [CCDirector sharedDirector];
 	
     // RAG: Replacing deprecated property with recommended successor
@@ -230,9 +366,13 @@ FindPOTScale(CGFloat size, CGFloat fixedSize)
     
 	// for rotation and other messages
 	[director setDelegate:navController_];
-	
-	// set the Navigation Controller as the root view controller
-	[window_ setRootViewController:navController_];
+
+	// Host the nav stack in a letterbox container so the GL surface stays 4:3 centered
+	// on wider/taller devices. Do not set navController_ as window.rootViewController
+	// directly — UIKit would force the director view to fill the full screen.
+	CCLetterboxViewController *letterbox =
+		[[CCLetterboxViewController alloc] initWithContentViewController:navController_];
+	[window_ setRootViewController:letterbox];
     
 	// make main window visible
 	[window_ makeKeyAndVisible];
