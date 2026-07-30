@@ -57,6 +57,12 @@ const CGSize FIXED_SIZE = {568, 384};
 // a UIViewController, and UIKit resets its view to fill the parent every layout.
 // Likewise, do NOT set frame on the UINavigationController's view directly; it
 // re-expands to the parent VC bounds. Size a plain intermediate "stage" UIView.
+//
+// iPadOS 26 (Apple TN3192):
+//   - UIRequiresFullScreen is ignored; do not rely on it for layout.
+//   - Info.plist must advertise all interface orientations.
+//   - Window resizing / portrait is OK because this letterbox + scale lock keep
+//     the authored 1024×768 canvas; see SceneDelegate sizeRestrictions too.
 // ---------------------------------------------------------------------------
 static const CGSize kARTADesignSize = {1024.0, 768.0};
 static const CGFloat kARTAAspect = 4.0 / 3.0;
@@ -146,7 +152,9 @@ static CGRect CCARTAAspectFitRect(CGRect bounds)
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
-	return self.contentViewController.supportedInterfaceOrientations;
+	// iPadOS 26+ requires the app to advertise all orientations; the letterbox stage
+	// keeps the 4:3 canvas correct regardless of device/window aspect.
+	return UIInterfaceOrientationMaskAll;
 }
 
 - (BOOL)shouldAutorotate
