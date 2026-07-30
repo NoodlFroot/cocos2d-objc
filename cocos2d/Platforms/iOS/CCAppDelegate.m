@@ -393,8 +393,13 @@ FindPOTScale(CGFloat size, CGFloat fixedSize)
     
 	// make main window visible
 	[window_ makeKeyAndVisible];
-    
-    [self forceOrientation];
+
+#if 0
+	// Disabled: setStatusBarOrientation: is deprecated (iOS 8) and a no-op on iOS 13+,
+	// which logs a runtime warning. Orientation comes from Info.plist + root VC masks
+	// (and ARTA's letterbox). Kept for upstream merge visibility of the old iOS 8 hack.
+	[self forceOrientation];
+#endif
 }
 
 - (void)setupFlexibleScreenMode:(NSDictionary *)config director:(CCDirectorIOS *)director
@@ -437,7 +442,10 @@ FindPOTScale(CGFloat size, CGFloat fixedSize)
     [director setProjection:CCDirectorProjectionCustom];
 }
 
-// iOS8 hack around orientation bug
+#if 0
+// iOS8 hack around orientation bug.
+// Disabled with the call site above: setStatusBarOrientation: is a no-op on iOS 13+
+// and only produces a deprecation/runtime warning. Kept for upstream merge visibility.
 -(void)forceOrientation
 {
 #if __CC_PLATFORM_IOS && defined(__IPHONE_8_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_8_0
@@ -455,6 +463,7 @@ FindPOTScale(CGFloat size, CGFloat fixedSize)
     }
 #endif
 }
+#endif
 
 // getting a call, pause the game
 -(void) applicationWillResignActive:(UIApplication *)application
