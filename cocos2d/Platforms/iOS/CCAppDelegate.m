@@ -63,6 +63,15 @@ const CGSize FIXED_SIZE = {568, 384};
 //   - Info.plist must advertise all interface orientations.
 //   - Window resizing / portrait is OK because this letterbox + scale lock keep
 //     the authored 1024×768 canvas; see SceneDelegate sizeRestrictions too.
+//   - SceneDelegate must size the UIWindow from the scene (coordinateSpace /
+//     effectiveGeometry), never UIScreen.bounds — Stage Manager otherwise
+//     clips the bottom of the 4:3 stage.
+//   - UIKit overlays on the GL view (e.g. CCAVPlayer) must use view.bounds,
+//     not director.viewSize. viewSize is the locked 1024×768 cocos canvas and
+//     diverges from UIKit points whenever the window is not classic iPad-sized.
+//   - Only adjust contentScaleFactor from directorDidReshapeProjection (after
+//     CCGLView has a current GL context); earlier layout passes can assert in
+//     CCConfiguration getOpenGLvariables.
 // ---------------------------------------------------------------------------
 static const CGSize kARTADesignSize = {1024.0, 768.0};
 static const CGFloat kARTAAspect = 4.0 / 3.0;
@@ -232,8 +241,8 @@ static CGRect CCARTAAspectFitRect(CGRect bounds)
 // This is not needed on iOS6 and could be added to the application:didFinish...
 -(void) directorDidReshapeProjection:(CCDirector*)director
 {
-	// ARTA: After CCLetterboxViewController gives us a 4:3 GL surface, map that
-	// surface onto the authored 1024×768 point canvas:
+	// Called from CCGLView layoutSubviews after the GL context is current.
+	// ARTA: Map the 4:3 GL surface onto the authored 1024×768 point canvas:
 	//   viewSize = viewSizeInPixels / contentScaleFactor  ⇒  {1024, 768}
 	// Without this, a letterboxed Mini (~992×744 points @2x) would report
 	// viewSize ≈ {992,744} and break hardcoded layout; a full-bleed wide screen
