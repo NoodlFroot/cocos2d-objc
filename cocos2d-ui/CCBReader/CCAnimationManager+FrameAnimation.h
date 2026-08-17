@@ -1,5 +1,5 @@
 //
-//  CCBAnimationManager+FrameAnimation.h
+//  CCAnimationManager+FrameAnimation.h
 //  cocos2d-ios
 //
 //  Created by Martin Walsh on 14/04/2014.
