@@ -218,11 +218,11 @@ static char * glExtensions;
     }
 #elif __CC_PLATFORM_IOS
 	
-	if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	if( UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
 	{
 		return ([UIScreen mainScreen].scale == 2) ? CCDeviceiPadRetinaDisplay : CCDeviceiPad;
 	}
-	else if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
+	else if( UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone )
 	{
 		CGSize preferredSize = [[UIScreen mainScreen] preferredMode].size;
 		// This code makes me sad. Very glad it's going away in v4.

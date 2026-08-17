@@ -3268,11 +3268,9 @@
 				9D2773B81AB77F3800D19A11 /* CCEffectStereo.m in Sources */,
 				5018F27E0DFDEAFF00C013A5 /* CCTextureCache.m in Sources */,
 				D31C795019994126007921E1 /* CCMetalSupport.m in Sources */,
-				D2DDB09D19805E8400233D80 /* CCMatrix4.m in Sources */,
 				5038B6B30E196CD8009A621E /* CCParticleSystemBase.m in Sources */,
 				504055B10E3230BD00213FEF /* CCParticleExamples.m in Sources */,
 				506602120E38A70D000B500E /* CCScheduler.m in Sources */,
-				D2DDB0A719805E8400233D80 /* CCMatrix3.m in Sources */,
 				D24161031958F6EE003673BD /* CCBAnimationManager.m in Sources */,
 				50A07B7B0E4CBCD300AAF0BB /* cocos2d.m in Sources */,
 				B7D273181822F4AA0054849B /* CCBSequenceProperty.m in Sources */,
@@ -3325,12 +3323,10 @@
 				D268FE1F1980791400ECBCD0 /* CCEffectUtils.m in Sources */,
 				D33803E618032F390072D8FE /* CCPhysicsNode.m in Sources */,
 				D24160FF1958F6EE003673BD /* CCAnimationManager.m in Sources */,
-				D285ECF1192EA92A009F4E88 /* CCGLView.m in Sources */,
 				9DDD047F19DE154400687820 /* CCEffectLighting.m in Sources */,
 				E01E6D8D121F130E001A484F /* CCLabelBMFont.m in Sources */,
 				E0EAD100121F4B4600B0C81C /* CCDirectorIOS.m in Sources */,
 				D24161011958F6EE003673BD /* CCAnimationManager+FrameAnimation.m in Sources */,
-				D285ECF9192EF5B2009F4E88 /* CCDirectorAndroid.m in Sources */,
 				D268FE0E198078FF00ECBCD0 /* CCEffectBloom.m in Sources */,
 				E0EAD109121F4B4600B0C81C /* CCGLView.m in Sources */,
 				9D85671E191B018200573093 /* CCEffectBrightness.m in Sources */,
@@ -3341,9 +3337,6 @@
 				E02BB705126CADEA006E46A2 /* CCAnimation.m in Sources */,
 				E0BC7DA01342CE7B001B4DCC /* CCShader.m in Sources */,
 				A0C20AC9144FDAF700D84B47 /* CCParticleBatchNode.m in Sources */,
-				A046E29414C1DB7D0005BBF2 /* CCDirectorMac.m in Sources */,
-				A046E29814C1DB7D0005BBF2 /* CCGLView.m in Sources */,
-				A046E29A14C1DB7E0005BBF2 /* CCWindow.m in Sources */,
 				B7D273121822F4AA0054849B /* CCBLocalizationManager.m in Sources */,
 				A0C87D1B14F9A3A100C0E8B2 /* NSThread+performBlock.m in Sources */,
 				D241610B1958F72B003673BD /* CCEffectRenderer.m in Sources */,
@@ -3353,7 +3346,6 @@
 				D380581B1889AD6000822437 /* CCRenderer.m in Sources */,
 				D369415F19CFDF170092A0BD /* CCRendererBasicTypes.m in Sources */,
 				A039EC00155C686B0061EE37 /* CCNode+Debug.m in Sources */,
-				D2DDB0A519805E8400233D80 /* CCQuaternion.m in Sources */,
 				D36D31B718BD3CAA00E45F08 /* CCProgressNode.m in Sources */,
 				83E1A86719C8ACA0000A3BCA /* CCPackageManager.m in Sources */,
 				D27451B819AE5517006DA0A1 /* CCEffectDistanceField.m in Sources */,
@@ -3731,6 +3723,7 @@
 					"CD_DEBUG=1",
 					DEBUG,
 					"COCOS2D_DEBUG=1",
+					"GLES_SILENCE_DEPRECATION=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_THUMB_SUPPORT = NO;
@@ -3755,6 +3748,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "-no_warning_for_no_symbols";
 				PRODUCT_NAME = cocos2d;
 				SKIP_INSTALL = YES;
 			};
@@ -3790,6 +3784,7 @@
 					"\"$(SRCROOT)/build/Debug-iphonesimulator\"",
 				);
 				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "-no_warning_for_no_symbols";
 				PRODUCT_NAME = cocos2d;
 				SKIP_INSTALL = YES;
 				ZERO_LINK = NO;
@@ -3995,6 +3990,7 @@
 					"CD_DEBUG=1",
 					DEBUG,
 					"COCOS2D_DEBUG=1",
+					"GLES_SILENCE_DEPRECATION=1",
 				);
 				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
@@ -4019,7 +4015,7 @@
 					"external/ObjectAL/**",
 					"external/SSZipArchive/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PROVISIONING_PROFILE = "";
@@ -4060,6 +4056,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NS_BLOCK_ASSERTIONS,
 					NDEBUG,
+					"GLES_SILENCE_DEPRECATION=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_THUMB_SUPPORT = NO;
@@ -4085,7 +4082,7 @@
 					"external/ObjectAL/**",
 					"external/SSZipArchive/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PROVISIONING_PROFILE = "";

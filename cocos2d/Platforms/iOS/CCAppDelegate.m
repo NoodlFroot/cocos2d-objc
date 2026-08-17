@@ -405,7 +405,7 @@ FindPOTScale(CGFloat size, CGFloat fixedSize)
 - (void)setupFlexibleScreenMode:(NSDictionary *)config director:(CCDirectorIOS *)director
 {
     // Setup tablet scaling if it was requested.
-    if(	UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad &&	[config[CCSetupTabletScale2X] boolValue] )
+    if(	UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad &&	[config[CCSetupTabletScale2X] boolValue] )
     {
         // Set the director to use 2 points per pixel.
         director.contentScaleFactor *= 2.0;
@@ -433,7 +433,7 @@ FindPOTScale(CGFloat size, CGFloat fixedSize)
     CGFloat scaleFactor = MIN(FindPOTScale(size.width, fixed.width), FindPOTScale(size.height, fixed.height));
 
     director.contentScaleFactor = scaleFactor;
-    director.UIScaleFactor = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? 1.0 : 0.5);
+    director.UIScaleFactor = (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone ? 1.0 : 0.5);
 
     // Let CCFileUtils know that "-ipad" textures should be treated as having a contentScale of 2.0.
     [[CCFileUtils sharedFileUtils] setiPadContentScaleFactor: 2.0];
