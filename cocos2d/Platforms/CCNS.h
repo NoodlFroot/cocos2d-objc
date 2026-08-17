@@ -41,11 +41,8 @@
 //#define CCNSRectToCGRect
 //#define CCNSPointToCGPoint
 
-//#elif __CC_PLATFORM_ANDROID
+#if __CC_PLATFORM_IOS
 
-#if __CC_PLATFORM_ANDROID || __CC_PLATFORM_IOS
-
-#if 1
 //#ifndef __CC_CG_STRING_UTILS
 #define __CC_CG_STRING_UTILS
 
@@ -148,7 +145,6 @@ static inline NSString *CCNSStringFromCGAffineTransform(CGAffineTransform m)
 #define CCNSRectToCGRect
 #define CCNSPointToCGPoint
 
-#endif
 
 #elif __CC_PLATFORM_MAC
 

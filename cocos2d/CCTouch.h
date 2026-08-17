@@ -11,9 +11,6 @@
 #if __CC_PLATFORM_IOS
 #import <UIKit/UIKit.h>
 #define PlatformTouch UITouch
-#elif __CC_PLATFORM_ANDROID
-@class CCTouchAndroid;
-#define PlatformTouch CCTouchAndroid // Note: Replace this with MotionEvent or some Android touch object
 #else 
 #define PlatformTouch NSObject
 #endif

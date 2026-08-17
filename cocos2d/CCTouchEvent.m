@@ -14,10 +14,6 @@
 #import "Platforms/iOS/CCTouchIOS.h"
 #define CCTouch CCTouchIOS
 
-#elif __CC_PLATFORM_ANDROID
-#import "Platforms/Android/CCTouchAndroid.h"
-#define CCTouch CCTouchAndroid
-
 #endif
 
 #ifndef __CC_TOUCH_MAX
@@ -152,6 +148,5 @@
 }
 
 @end
-
 
 

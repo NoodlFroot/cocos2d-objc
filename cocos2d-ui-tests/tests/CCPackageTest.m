@@ -39,10 +39,7 @@
     [self addLabels];
 
 
-
-    #if __CC_PLATFORM_ANDROID
-    NSURL *remoteURL = [NSURL URLWithString:@"http://siner.de/cocos2d_test_resources/testpackage-Android-phonehd.zip"];
-    #elif __CC_PLATFORM_IOS
+    #if __CC_PLATFORM_IOS
     NSURL *remoteURL = [NSURL URLWithString:@"http://siner.de/cocos2d_test_resources/testpackage-iOS-phonehd.zip"];
     #endif
 

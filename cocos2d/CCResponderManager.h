@@ -36,12 +36,8 @@
 #import "CCTouchEvent.h"
 
 #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
-#if !__CC_PLATFORM_ANDROID
 #import <UIKit/UIKit.h>
 #define RESPONDER UIResponder
-#else
-#define RESPONDER NSObject
-#endif
 
 #pragma mark - iOS Running Responder
 

@@ -94,10 +94,8 @@ static CCTextureCache *sharedTextureCache;
 		// Skip the GL context sharegroup code for Metal.
 		if([CCConfiguration sharedConfiguration].graphicsAPI == CCGraphicsAPIMetal) return self;
 		
-#if !__CC_PLATFORM_ANDROID
 		CCGLView *view = (CCGLView*)[[CCDirector sharedDirector] view];
 		NSAssert(view, @"Do not initialize the TextureCache before the Director");
-#endif
 
 #if __CC_PLATFORM_IOS
 		_auxGLcontext = [[EAGLContext alloc]
@@ -112,9 +110,7 @@ static CCTextureCache *sharedTextureCache;
 
 #endif // __CC_PLATFORM_MAC
 
-#if !__CC_PLATFORM_ANDROID
 		NSAssert( _auxGLcontext, @"TextureCache: Could not create EAGL context");
-#endif
 
 	}
 
@@ -139,9 +135,7 @@ static CCTextureCache *sharedTextureCache;
 {
 	CCLOGINFO(@"cocos2d: deallocing %@", self);
     
-#if !__CC_PLATFORM_ANDROID
 	_auxGLcontext = nil;
-#endif
 	sharedTextureCache = nil;
     
 	// dispatch_release(_loadingQueue);
@@ -307,7 +301,7 @@ static CCTextureCache *sharedTextureCache;
 		if ( [lowerCase hasSuffix:@".pvr"] || [lowerCase hasSuffix:@".pvr.gz"] || [lowerCase hasSuffix:@".pvr.ccz"] )
 			tex = [self addPVRImage:path];
 
-#if __CC_PLATFORM_IOS || __CC_PLATFORM_ANDROID
+#if __CC_PLATFORM_IOS
 
 		else {
 #if __CC_PLATFORM_IOS

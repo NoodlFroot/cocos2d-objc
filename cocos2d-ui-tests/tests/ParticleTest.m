@@ -122,7 +122,7 @@
 }
 
 
-#if __CC_PLATFORM_IOS || __CC_PLATFORM_ANDROID
+#if __CC_PLATFORM_IOS
 #define PARTICLE_FIRE_NAME @"fire.pvr"
 #elif __CC_PLATFORM_MAC
 #define PARTICLE_FIRE_NAME @"fire.png"
@@ -143,7 +143,6 @@
 
   [self createScene: @"Multiple Particle Systems - There should be 5"];
 }
-
 
 
 -(void) setupGalaxy

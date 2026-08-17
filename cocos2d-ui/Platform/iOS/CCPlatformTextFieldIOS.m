@@ -170,10 +170,6 @@ NSString* const CCPlatformTextFieldIOSReturnPressedNotification = @"CCPlatformTe
     
     BOOL focusOnTextField = _textField.isEditing;
     
-#if __CC_PLATFORM_ANDROID
-    focusOnTextField = _textFieldIsEditing;
-#endif
-    
     if (focusOnTextField)
     {
         [self focusOnTextField];
@@ -198,13 +194,6 @@ NSString* const CCPlatformTextFieldIOSReturnPressedNotification = @"CCPlatformTe
 
 - (void) focusOnTextField
 {
-#if __CC_PLATFORM_ANDROID
-    // Ensure that all textfields have actually been positioned before checkings textField.frame property,
-    // it's possible for the apportable keyboard notification to be fired before the mainloop has had a chance to kick of a scheduler update
-    CCDirector *director = [CCDirector sharedDirector];
-    [director.scheduler update:0.0];
-#endif
-    
     CGSize windowSize = [[CCDirector sharedDirector] viewSize];
     
     // Find the location of the textField
@@ -223,13 +212,6 @@ NSString* const CCPlatformTextFieldIOSReturnPressedNotification = @"CCPlatformTe
         
         if (offset < -_keyboardHeight) offset = -_keyboardHeight;
         
-#if __CC_PLATFORM_ANDROID
-        // Apportable does not support changing the openglview position, so we will just change the current scenes position instead
-        CCScene *runningScene = [[CCDirector sharedDirector] runningScene];
-        CGPoint newPosition = runningScene.position;
-        newPosition.y = (offset * -1);
-        runningScene.position = newPosition;
-#else
         // Calcualte target frame
         UIView* view = [[CCDirector sharedDirector] view];
         CGRect frame = view.frame;
@@ -239,7 +221,6 @@ NSString* const CCPlatformTextFieldIOSReturnPressedNotification = @"CCPlatformTe
         [UIView animateWithDuration:0.2 animations:^{
             view.frame = frame;
         }];
-#endif
     }
 }
 
@@ -247,21 +228,12 @@ NSString* const CCPlatformTextFieldIOSReturnPressedNotification = @"CCPlatformTe
 {
     // Slide the main view back down
     
-#if __CC_PLATFORM_ANDROID
-    // Apportable does not support changing the openglview position, so we will just change the current scenes position instead
-    CCScene *runningScene = [[CCDirector sharedDirector] runningScene];
-    CGPoint newPosition = CGPointZero;
-    newPosition.y = 0.0f;
-    runningScene.position = newPosition;
-#else
     UIView* view = [[CCDirector sharedDirector] view];
     [UIView animateWithDuration:0.2 animations:^{
         CGRect frame = view.frame;
         frame.origin = CGPointZero;
         view.frame = frame;
     }];
-#endif
-    
 }
 
 

@@ -27,10 +27,6 @@
 
 #import "CCPlatformTextField.h"
 
-#if __CC_PLATFORM_ANDROID
-#import <AndroidKit/AndroidEditText.h>
-#endif
-
 
 @class CCPlatformTextField;
 
@@ -86,8 +82,6 @@
 @property (nonatomic,readonly) UITextField* textField;
 #elif __CC_PLATFORM_MAC
 @property (nonatomic,readonly) NSTextField* textField;
-#elif __CC_PLATFORM_ANDROID
-@property (nonatomic,readonly) AndroidEditText* textField;
 #endif
 
 // purposefully undocumented: internal property

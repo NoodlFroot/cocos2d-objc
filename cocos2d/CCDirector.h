@@ -68,12 +68,7 @@ typedef NS_ENUM(NSUInteger, CCDirectorProjection) {
 #define CC_VIEWCONTROLLER NSObject
 #define CC_VIEW NSOpenGLView
 
-#elif __CC_PLATFORM_ANDROID
-#define CC_VIEWCONTROLLER NSObject
-#define CC_VIEW CCGLView
-
 #endif
-
 
 
 /** The director creates and handles the main Window and the Cocos2D view. It also presents Scenes and initiates scene updates and drawing.

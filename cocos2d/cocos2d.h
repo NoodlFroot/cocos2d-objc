@@ -161,13 +161,6 @@
 #import "Platforms/Mac/CCWindow.h"
 #import "Platforms/Mac/NSEvent+CC.h"
 
-#elif __CC_PLATFORM_ANDROID
-#import "Platforms/Android/CCActivity.h"
-#import "Platforms/Android/CCGLView.h"
-#import "Platforms/Android/CCDirectorAndroid.h"
-
-#import <android/native_window.h>
-#import <bridge/runtime.h>
 #endif
 
 //
@@ -180,7 +173,6 @@
 #import "Support/NSThread+performBlock.h"
 #import "Support/uthash.h"
 #import "Support/utlist.h"
-
 
 
 #ifdef __cplusplus
