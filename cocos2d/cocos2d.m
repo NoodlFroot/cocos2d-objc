@@ -28,7 +28,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-NSString *cocos2dVersion()
+NSString *cocos2dVersion(void)
 {
     int major   = (COCOS2D_VERSION >> 16) & 0x0000FF;
     int minor   = (COCOS2D_VERSION >>  8) & 0x0000FF;

@@ -150,7 +150,7 @@ static const MTLPixelFormat MetalPixelFormats[] = {
 -(CGPoint)offset {return [(CCSpriteFrame *)_target offset];}
 -(BOOL)rotated {return [_target rotated];}
 -(CGSize)originalSize {return [_target originalSize];}
--(CCTexture *)texture {return [_target texture];}
+-(CCTexture *)texture {return [(CCSpriteFrame *)_target texture];}
 
 // Let the rest fall back to a slow forwarded path.
 - (id)forwardingTargetForSelector:(SEL)aSelector
@@ -568,7 +568,7 @@ static CCTexture *CCTextureNone = nil;
 			data = malloc(textureHeight * textureWidth * 4);
 //			info = hasAlpha ? kCGImageAlphaPremultipliedLast : kCGImageAlphaNoneSkipLast;
 //			info = kCGImageAlphaPremultipliedLast;  // issue #886. This patch breaks BMP images.
-			context = CGBitmapContextCreate(data, textureWidth, textureHeight, 8, 4 * textureWidth, colorSpace, info | kCGBitmapByteOrder32Big);
+			context = CGBitmapContextCreate(data, textureWidth, textureHeight, 8, 4 * textureWidth, colorSpace, (CGBitmapInfo)info | kCGBitmapByteOrder32Big);
 			CGColorSpaceRelease(colorSpace);
 			break;
 		case CCTexturePixelFormat_A8:

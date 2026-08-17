@@ -854,7 +854,7 @@ static CCDirector *_sharedDirector = nil;
 @property(nonatomic, strong) NSString *string;
 @end
 
-static const int CCFPSLabelChars = 12;
+enum { CCFPSLabelChars = 12 };
 static const float CCFPSLabelItemWidth = 12;
 static const float CCFPSLabelItemHeight = 32;
 

@@ -231,7 +231,7 @@
 	return [CCColor colorWithCcColor4f:ccc4FInterpolated(self.ccColor4f, toColor.ccColor4f, t)];
 }
 
-static NSDictionary *namedColors() {
+static NSDictionary *namedColors(void) {
     static NSDictionary *namedColors = nil;
     static dispatch_once_t once = 0L;
     dispatch_once(&once, ^{

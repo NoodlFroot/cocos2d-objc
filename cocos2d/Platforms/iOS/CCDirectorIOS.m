@@ -328,14 +328,12 @@
 
 	gettimeofday( &_lastUpdate, NULL);
 
-	// approximate frame rate
-	// assumes device refreshes at 60 fps
-	int frameInterval = (int) floor(_animationInterval * 60.0f);
-
-	CCLOG(@"cocos2d: animation started with frame interval: %.2f", 60.0f/frameInterval);
+	CCLOG(@"cocos2d: animation started with frame interval: %.2f", 1.0 / _animationInterval);
 
 	_displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(mainLoop:)];
-	[_displayLink setFrameInterval:frameInterval];
+	NSInteger fps = (NSInteger)lround(1.0 / _animationInterval);
+	if (fps < 1) fps = 1;
+	[_displayLink setPreferredFramesPerSecond:fps];
 
 #if CC_DIRECTOR_IOS_USE_BACKGROUND_THREAD
 	//

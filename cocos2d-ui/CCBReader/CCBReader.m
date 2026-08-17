@@ -1342,7 +1342,7 @@ SelectorNameForProperty(objc_property_t property)
         
         return selector;
     } else {
-        const int MAX_LENGTH = 256;
+        enum { MAX_LENGTH = 256 };
         
         const char *pname = property_getName(property);
         char sname[MAX_LENGTH + 1];

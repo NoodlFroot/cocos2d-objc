@@ -236,12 +236,9 @@ NSString* const CCPlatformTextFieldIOSReturnPressedNotification = @"CCPlatformTe
         frame.origin.y = offset;
         
         // Do animation
-        [UIView beginAnimations: @"textFieldAnim" context: nil];
-        [UIView setAnimationBeginsFromCurrentState: YES];
-        [UIView setAnimationDuration: 0.2f];
-        
-        view.frame = frame;
-        [UIView commitAnimations];
+        [UIView animateWithDuration:0.2 animations:^{
+            view.frame = frame;
+        }];
 #endif
     }
 }
@@ -258,15 +255,11 @@ NSString* const CCPlatformTextFieldIOSReturnPressedNotification = @"CCPlatformTe
     runningScene.position = newPosition;
 #else
     UIView* view = [[CCDirector sharedDirector] view];
-    [UIView beginAnimations: @"textFieldAnim" context: nil];
-    [UIView setAnimationBeginsFromCurrentState: YES];
-    [UIView setAnimationDuration: 0.2f];
-    
-    CGRect frame = view.frame;
-    frame.origin = CGPointZero;
-    view.frame = frame;
-    
-    [UIView commitAnimations];
+    [UIView animateWithDuration:0.2 animations:^{
+        CGRect frame = view.frame;
+        frame.origin = CGPointZero;
+        view.frame = frame;
+    }];
 #endif
     
 }

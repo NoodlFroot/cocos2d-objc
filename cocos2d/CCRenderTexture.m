@@ -417,7 +417,7 @@ FlipY(GLKMatrix4 projection)
 	
 	// make data provider with data.
 	// TODO find out why iref can't be used as the return value.
-	CGBitmapInfo bitmapInfo	= kCGImageAlphaPremultipliedLast | kCGBitmapByteOrderDefault;
+	CGBitmapInfo bitmapInfo	= (CGBitmapInfo)kCGImageAlphaPremultipliedLast | kCGBitmapByteOrderDefault;
 	CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, buffer, myDataLength, NULL);
 	CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
 	CGImageRef iref	= CGImageCreate(tx, ty,
