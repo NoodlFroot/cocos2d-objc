@@ -289,7 +289,6 @@
 		7A59476619E3731600F65F90 /* CCAnimationManager_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = D24160F61958F6EE003673BD /* CCAnimationManager_Private.h */; };
 		7A59476719E3731600F65F90 /* CCAnimationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D24160F71958F6EE003673BD /* CCAnimationManager.h */; };
 		7A59476919E3731700F65F90 /* CCAnimationManager+FrameAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = D24160F91958F6EE003673BD /* CCAnimationManager+FrameAnimation.h */; };
-		7A59476B19E3731800F65F90 /* CCBAnimationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D24160FB1958F6EE003673BD /* CCBAnimationManager.h */; };
 		7A59476D19E3731800F65F90 /* CCBKeyframe.h in Headers */ = {isa = PBXBuildFile; fileRef = B7D273021822F4AA0054849B /* CCBKeyframe.h */; };
 		7A59476F19E3731900F65F90 /* CCBLocalizationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = B7D273041822F4AA0054849B /* CCBLocalizationManager.h */; };
 		7A59477119E3731A00F65F90 /* CCBReader.h in Headers */ = {isa = PBXBuildFile; fileRef = B7D273061822F4AA0054849B /* CCBReader.h */; };
@@ -420,7 +419,6 @@
 		7A5948B019E375B900F65F90 /* CCPlatformTextFieldMac.m in Sources */ = {isa = PBXBuildFile; fileRef = 571CD02519649E03003D460C /* CCPlatformTextFieldMac.m */; };
 		7A5948B319E375B900F65F90 /* CCAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D24160F81958F6EE003673BD /* CCAnimationManager.m */; };
 		7A5948B519E375B900F65F90 /* CCAnimationManager+FrameAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = D24160FA1958F6EE003673BD /* CCAnimationManager+FrameAnimation.m */; };
-		7A5948B719E375BA00F65F90 /* CCBAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D24160FC1958F6EE003673BD /* CCBAnimationManager.m */; };
 		7A5948B919E375BA00F65F90 /* CCBKeyframe.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D273031822F4AA0054849B /* CCBKeyframe.m */; };
 		7A5948BB19E375BA00F65F90 /* CCBLocalizationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D273051822F4AA0054849B /* CCBLocalizationManager.m */; };
 		7A5948BD19E375BB00F65F90 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D273071822F4AA0054849B /* CCBReader.m */; };
@@ -514,8 +512,6 @@
 		A06D9C141728D5F600704732 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A06D9C131728D5F600704732 /* CoreText.framework */; };
 		A0A7A53C1514F27D00C8BD16 /* CCActionCatmullRom.h in Headers */ = {isa = PBXBuildFile; fileRef = A0A7A53A1514F27D00C8BD16 /* CCActionCatmullRom.h */; };
 		A0A7A53D1514F27D00C8BD16 /* CCActionCatmullRom.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A7A53B1514F27D00C8BD16 /* CCActionCatmullRom.m */; };
-		A0C20AC8144FDAF700D84B47 /* CCParticleBatchNode.h in Headers */ = {isa = PBXBuildFile; fileRef = A0C20AC6144FDAF700D84B47 /* CCParticleBatchNode.h */; };
-		A0C20AC9144FDAF700D84B47 /* CCParticleBatchNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C20AC7144FDAF700D84B47 /* CCParticleBatchNode.m */; };
 		A0C87D1A14F9A3A100C0E8B2 /* NSThread+performBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = A0C87D1814F9A3A100C0E8B2 /* NSThread+performBlock.h */; };
 		A0C87D1B14F9A3A100C0E8B2 /* NSThread+performBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C87D1914F9A3A100C0E8B2 /* NSThread+performBlock.m */; };
 		A0DA0BC315BCDCA200E80A92 /* CCDrawNode.h in Headers */ = {isa = PBXBuildFile; fileRef = A0DA0BC115BCDCA200E80A92 /* CCDrawNode.h */; };
@@ -618,8 +614,6 @@
 		D24160FF1958F6EE003673BD /* CCAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D24160F81958F6EE003673BD /* CCAnimationManager.m */; };
 		D24161001958F6EE003673BD /* CCAnimationManager+FrameAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = D24160F91958F6EE003673BD /* CCAnimationManager+FrameAnimation.h */; };
 		D24161011958F6EE003673BD /* CCAnimationManager+FrameAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = D24160FA1958F6EE003673BD /* CCAnimationManager+FrameAnimation.m */; };
-		D24161021958F6EE003673BD /* CCBAnimationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D24160FB1958F6EE003673BD /* CCBAnimationManager.h */; };
-		D24161031958F6EE003673BD /* CCBAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D24160FC1958F6EE003673BD /* CCBAnimationManager.m */; };
 		D24161091958F72B003673BD /* CCEffectRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = D24161041958F72B003673BD /* CCEffectRenderer.h */; };
 		D241610A1958F72B003673BD /* CCEffectRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = D24161041958F72B003673BD /* CCEffectRenderer.h */; };
 		D241610B1958F72B003673BD /* CCEffectRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = D24161051958F72B003673BD /* CCEffectRenderer.m */; };
@@ -948,7 +942,6 @@
 		D37D197818B6665700B23FDE /* CCTiledMapLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D2AC9210E90DFA0068ECEB /* CCTiledMapLayer.m */; };
 		D37D197918B6665700B23FDE /* CCTiledMapObjectGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D2AC9410E90DFA0068ECEB /* CCTiledMapObjectGroup.m */; };
 		D37D197A18B6665700B23FDE /* CCTMXXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CFAC381023660000175934 /* CCTMXXMLParser.m */; };
-		D37D197B18B6666E00B23FDE /* CCSpriteBatchNode.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C3655A11F0AE9B001C08F9 /* CCSpriteBatchNode.m */; };
 		D380581A1889AD6000822437 /* CCRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = D38058181889AD6000822437 /* CCRenderer.h */; };
 		D380581B1889AD6000822437 /* CCRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = D38058191889AD6000822437 /* CCRenderer.m */; };
 		D38058201889CE7700822437 /* CCCache.h in Headers */ = {isa = PBXBuildFile; fileRef = D380581E1889CE7700822437 /* CCCache.h */; };
@@ -979,7 +972,6 @@
 		E02BB705126CADEA006E46A2 /* CCAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = E02BB703126CADEA006E46A2 /* CCAnimation.m */; };
 		E0BC7D9F1342CE7B001B4DCC /* CCShader.h in Headers */ = {isa = PBXBuildFile; fileRef = E0BC7D9B1342CE7B001B4DCC /* CCShader.h */; };
 		E0BC7DA01342CE7B001B4DCC /* CCShader.m in Sources */ = {isa = PBXBuildFile; fileRef = E0BC7D9C1342CE7B001B4DCC /* CCShader.m */; };
-		E0C3655B11F0AE9B001C08F9 /* CCSpriteBatchNode.h in Headers */ = {isa = PBXBuildFile; fileRef = E0C3655911F0AE9B001C08F9 /* CCSpriteBatchNode.h */; };
 		E0C54DCA11F9CF2700B9E4CB /* ccUtils.c in Sources */ = {isa = PBXBuildFile; fileRef = E0C54DC811F9CF2700B9E4CB /* ccUtils.c */; };
 		E0C54DCB11F9CF2700B9E4CB /* ccUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = E0C54DC911F9CF2700B9E4CB /* ccUtils.h */; };
 		E0EAD0FF121F4B4600B0C81C /* CCDirectorIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = E0EAD0EA121F4B4600B0C81C /* CCDirectorIOS.h */; };
@@ -1414,8 +1406,6 @@
 		D24160F81958F6EE003673BD /* CCAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCAnimationManager.m; path = "cocos2d-ui/CCBReader/CCAnimationManager.m"; sourceTree = "<group>"; };
 		D24160F91958F6EE003673BD /* CCAnimationManager+FrameAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CCAnimationManager+FrameAnimation.h"; path = "cocos2d-ui/CCBReader/CCAnimationManager+FrameAnimation.h"; sourceTree = "<group>"; };
 		D24160FA1958F6EE003673BD /* CCAnimationManager+FrameAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CCAnimationManager+FrameAnimation.m"; path = "cocos2d-ui/CCBReader/CCAnimationManager+FrameAnimation.m"; sourceTree = "<group>"; };
-		D24160FB1958F6EE003673BD /* CCBAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCBAnimationManager.h; path = "cocos2d-ui/CCBReader/CCBAnimationManager.h"; sourceTree = "<group>"; };
-		D24160FC1958F6EE003673BD /* CCBAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCBAnimationManager.m; path = "cocos2d-ui/CCBReader/CCBAnimationManager.m"; sourceTree = "<group>"; };
 		D24161041958F72B003673BD /* CCEffectRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCEffectRenderer.h; sourceTree = "<group>"; };
 		D24161051958F72B003673BD /* CCEffectRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCEffectRenderer.m; sourceTree = "<group>"; };
 		D24161061958F72B003673BD /* CCEffectSaturation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCEffectSaturation.h; sourceTree = "<group>"; };
@@ -2155,8 +2145,6 @@
 				D24160F81958F6EE003673BD /* CCAnimationManager.m */,
 				D24160F91958F6EE003673BD /* CCAnimationManager+FrameAnimation.h */,
 				D24160FA1958F6EE003673BD /* CCAnimationManager+FrameAnimation.m */,
-				D24160FB1958F6EE003673BD /* CCBAnimationManager.h */,
-				D24160FC1958F6EE003673BD /* CCBAnimationManager.m */,
 				B7D273021822F4AA0054849B /* CCBKeyframe.h */,
 				B7D273031822F4AA0054849B /* CCBKeyframe.m */,
 				B7D273041822F4AA0054849B /* CCBLocalizationManager.h */,
@@ -2519,7 +2507,6 @@
 				D2DDB0A119805E8400233D80 /* CCVector4.h in Headers */,
 				50D898F31192CB7500458C29 /* uthash.h in Headers */,
 				508EAC311193F8B0007F058D /* utlist.h in Headers */,
-				E0C3655B11F0AE9B001C08F9 /* CCSpriteBatchNode.h in Headers */,
 				E0C54DCB11F9CF2700B9E4CB /* ccUtils.h in Headers */,
 				D23C5CBC194BC500007CA669 /* CCTouchAndroid.h in Headers */,
 				E01E6D8C121F130E001A484F /* CCLabelBMFont.h in Headers */,
@@ -2548,7 +2535,6 @@
 				E0BC7D9F1342CE7B001B4DCC /* CCShader.h in Headers */,
 				D2DDB09319805E8400233D80 /* CCMathUtilsAndroid.h in Headers */,
 				D39FA9C818C1BC6B00441627 /* CCShader_Private.h in Headers */,
-				A0C20AC8144FDAF700D84B47 /* CCParticleBatchNode.h in Headers */,
 				A046E29314C1DB7D0005BBF2 /* CCDirectorMac.h in Headers */,
 				A046E29714C1DB7D0005BBF2 /* CCGLView.h in Headers */,
 				D34CAD6119C3A0B5009BED7A /* NSValue+CCRenderer.h in Headers */,
@@ -2576,7 +2562,6 @@
 				A003AC8C1657071100C7B792 /* ccFPSImages.h in Headers */,
 				B74C2B9B17BDA63A00A829C0 /* CCSprite9Slice.h in Headers */,
 				B77060CF18341AD50043CC67 /* CCBReader_Private.h in Headers */,
-				D24161021958F6EE003673BD /* CCBAnimationManager.h in Headers */,
 				B75C2E7C17C5908B002B0E0D /* NSAttributedString+CCAdditions.h in Headers */,
 				A6A0734517C788EB004343C8 /* CCResponderManager.h in Headers */,
 				A6A0734A17C78EF3004343C8 /* CCResponder.h in Headers */,
@@ -2776,7 +2761,6 @@
 				7A59476619E3731600F65F90 /* CCAnimationManager_Private.h in Headers */,
 				7A59476719E3731600F65F90 /* CCAnimationManager.h in Headers */,
 				7A59476919E3731700F65F90 /* CCAnimationManager+FrameAnimation.h in Headers */,
-				7A59476B19E3731800F65F90 /* CCBAnimationManager.h in Headers */,
 				7A59476D19E3731800F65F90 /* CCBKeyframe.h in Headers */,
 				7A59476F19E3731900F65F90 /* CCBLocalizationManager.h in Headers */,
 				7A59477119E3731A00F65F90 /* CCBReader.h in Headers */,
@@ -3271,7 +3255,6 @@
 				5038B6B30E196CD8009A621E /* CCParticleSystemBase.m in Sources */,
 				504055B10E3230BD00213FEF /* CCParticleExamples.m in Sources */,
 				506602120E38A70D000B500E /* CCScheduler.m in Sources */,
-				D24161031958F6EE003673BD /* CCBAnimationManager.m in Sources */,
 				50A07B7B0E4CBCD300AAF0BB /* cocos2d.m in Sources */,
 				B7D273181822F4AA0054849B /* CCBSequenceProperty.m in Sources */,
 				501CCFB40E99657C00B86F68 /* TGAlib.m in Sources */,
@@ -3317,7 +3300,6 @@
 				D272032618FC89A000B100FF /* CCEffect.m in Sources */,
 				83E1A87719C8ACC1000A3BCA /* CCPackageDownload.m in Sources */,
 				50FBB2DB117613F500150761 /* CCActionTween.m in Sources */,
-				D37D197B18B6666E00B23FDE /* CCSpriteBatchNode.m in Sources */,
 				D3903B0D1995288D003AA81A /* CCNoARC.m in Sources */,
 				E0C54DCA11F9CF2700B9E4CB /* ccUtils.c in Sources */,
 				D268FE1F1980791400ECBCD0 /* CCEffectUtils.m in Sources */,
@@ -3336,7 +3318,6 @@
 				E02BB6D7126CA93A006E46A2 /* CCAnimationCache.m in Sources */,
 				E02BB705126CADEA006E46A2 /* CCAnimation.m in Sources */,
 				E0BC7DA01342CE7B001B4DCC /* CCShader.m in Sources */,
-				A0C20AC9144FDAF700D84B47 /* CCParticleBatchNode.m in Sources */,
 				B7D273121822F4AA0054849B /* CCBLocalizationManager.m in Sources */,
 				A0C87D1B14F9A3A100C0E8B2 /* NSThread+performBlock.m in Sources */,
 				D241610B1958F72B003673BD /* CCEffectRenderer.m in Sources */,
@@ -3509,7 +3490,6 @@
 				7A5948B019E375B900F65F90 /* CCPlatformTextFieldMac.m in Sources */,
 				7A5948B319E375B900F65F90 /* CCAnimationManager.m in Sources */,
 				7A5948B519E375B900F65F90 /* CCAnimationManager+FrameAnimation.m in Sources */,
-				7A5948B719E375BA00F65F90 /* CCBAnimationManager.m in Sources */,
 				7A5948B919E375BA00F65F90 /* CCBKeyframe.m in Sources */,
 				7A5948BB19E375BA00F65F90 /* CCBLocalizationManager.m in Sources */,
 				7A5948BD19E375BB00F65F90 /* CCBReader.m in Sources */,

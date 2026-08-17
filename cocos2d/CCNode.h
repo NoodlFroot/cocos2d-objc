@@ -40,7 +40,6 @@
 @class CCActionManager;
 @class CCAction;
 @class CCPhysicsBody;
-@class CCBAnimationManager;
 @class CCAnimationManager;
 
 /**

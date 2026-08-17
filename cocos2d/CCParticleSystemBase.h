@@ -30,7 +30,6 @@
 #import "ccTypes.h"
 #import "ccConfig.h"
 
-@class CCParticleBatchNode;
 @class CCTexture;
 
 /** The Particle emitter lives forever. */

@@ -49,7 +49,6 @@
 // cocos2d
 #import "ccConfig.h"
 #import "CCParticleSystemBase.h"
-#import "CCParticleBatchNode.h"
 #import "CCTexture.h"
 #import "CCTextureCache.h"
 #import "ccMacros.h"
@@ -319,7 +318,6 @@
         
         _resetOnVisibilityToggle = YES;
 
-		//for batchNode
 		_transformSystemDirty = NO;
 	}
 	return self;
@@ -770,7 +768,7 @@
 	return _mode.B.rotatePerSecondVar;
 }
 
-#pragma mark ParticleSystem - methods for batchNode rendering
+#pragma mark ParticleSystem - transform
 
 //don't use a transform matrix, this is faster
 -(void) setScale:(float) s

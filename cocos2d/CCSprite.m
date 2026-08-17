@@ -26,7 +26,6 @@
  */
 
 #import "ccConfig.h"
-#import "CCSpriteBatchNode.h"
 #import "CCSprite.h"
 #import "CCSpriteFrame.h"
 #import "CCSpriteFrameCache.h"
@@ -348,10 +347,6 @@
 
 #pragma mark CCSprite - CCNode overrides
 
-//
-// CCNode property overloads
-// used only when parent is CCSpriteBatchNode
-//
 #pragma mark CCSprite - property overloads
 
 -(void)setFlipX:(BOOL)b

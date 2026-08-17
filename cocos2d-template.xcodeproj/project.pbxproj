@@ -122,7 +122,6 @@
 		0E0CB5C01B3B1E1B00DC6213 /* ZipUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CB53D1B3B1E1B00DC6213 /* ZipUtils.m */; };
 		0E0CB5F51B3B1E2300DC6213 /* CCAnimationManager+FrameAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CB5C41B3B1E2300DC6213 /* CCAnimationManager+FrameAnimation.m */; };
 		0E0CB5F61B3B1E2300DC6213 /* CCAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CB5C61B3B1E2300DC6213 /* CCAnimationManager.m */; };
-		0E0CB5F71B3B1E2300DC6213 /* CCBAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CB5C91B3B1E2300DC6213 /* CCBAnimationManager.m */; };
 		0E0CB5F81B3B1E2300DC6213 /* CCBKeyframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CB5CB1B3B1E2300DC6213 /* CCBKeyframe.m */; };
 		0E0CB5F91B3B1E2300DC6213 /* CCBLocalizationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CB5CD1B3B1E2300DC6213 /* CCBLocalizationManager.m */; };
 		0E0CB5FA1B3B1E2300DC6213 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0CB5CF1B3B1E2300DC6213 /* CCBReader.m */; };
@@ -473,8 +472,6 @@
 		0E0CB5C51B3B1E2300DC6213 /* CCAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAnimationManager.h; sourceTree = "<group>"; };
 		0E0CB5C61B3B1E2300DC6213 /* CCAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCAnimationManager.m; sourceTree = "<group>"; };
 		0E0CB5C71B3B1E2300DC6213 /* CCAnimationManager_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAnimationManager_Private.h; sourceTree = "<group>"; };
-		0E0CB5C81B3B1E2300DC6213 /* CCBAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBAnimationManager.h; sourceTree = "<group>"; };
-		0E0CB5C91B3B1E2300DC6213 /* CCBAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBAnimationManager.m; sourceTree = "<group>"; };
 		0E0CB5CA1B3B1E2300DC6213 /* CCBKeyframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBKeyframe.h; sourceTree = "<group>"; };
 		0E0CB5CB1B3B1E2300DC6213 /* CCBKeyframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBKeyframe.m; sourceTree = "<group>"; };
 		0E0CB5CC1B3B1E2300DC6213 /* CCBLocalizationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBLocalizationManager.h; sourceTree = "<group>"; };
@@ -1005,8 +1002,6 @@
 				0E0CB5C51B3B1E2300DC6213 /* CCAnimationManager.h */,
 				0E0CB5C61B3B1E2300DC6213 /* CCAnimationManager.m */,
 				0E0CB5C71B3B1E2300DC6213 /* CCAnimationManager_Private.h */,
-				0E0CB5C81B3B1E2300DC6213 /* CCBAnimationManager.h */,
-				0E0CB5C91B3B1E2300DC6213 /* CCBAnimationManager.m */,
 				0E0CB5CA1B3B1E2300DC6213 /* CCBKeyframe.h */,
 				0E0CB5CB1B3B1E2300DC6213 /* CCBKeyframe.m */,
 				0E0CB5CC1B3B1E2300DC6213 /* CCBLocalizationManager.h */,
@@ -1565,7 +1560,6 @@
 				0E0CB6CD1B3B1E6C00DC6213 /* OALSuspendHandler.m in Sources */,
 				0E0CB5BF1B3B1E1B00DC6213 /* TGAlib.m in Sources */,
 				0E0CB5AC1B3B1E1B00DC6213 /* CCGLView.m in Sources */,
-				0E0CB5F71B3B1E2300DC6213 /* CCBAnimationManager.m in Sources */,
 				0E0CB6671B3B1E5700DC6213 /* cpPivotJoint.c in Sources */,
 				0E0CB5B71B3B1E1B00DC6213 /* CCColor.m in Sources */,
 				0E0CB6721B3B1E5700DC6213 /* cpSpaceQuery.c in Sources */,

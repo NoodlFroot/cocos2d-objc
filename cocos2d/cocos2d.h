@@ -93,7 +93,6 @@
 #import "CCScene.h"
 #import "CCSprite.h"
 #import "CCSprite9Slice.h"
-#import "CCSpriteBatchNode.h"
 #import "CCSpriteFrame.h"
 #import "CCSpriteFrameCache.h"
 #import "CCTMXXMLParser.h"

@@ -29,7 +29,6 @@
 #import "CCNode.h"
 #import "CCProtocols.h"
 
-@class CCSpriteBatchNode;
 @class CCSpriteFrame;
 @class CCAnimation;
 
