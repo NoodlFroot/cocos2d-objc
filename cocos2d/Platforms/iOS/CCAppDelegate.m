@@ -52,6 +52,9 @@ const CGSize FIXED_SIZE = {568, 384};
 //   1. Host the director inside CCLetterboxViewController so the GL surface is a
 //      centered 4:3 UIView (black bars on Mini / other non-4:3 devices).
 //   2. Adjust director.contentScaleFactor so viewSize is always {1024,768}.
+//   3. Cap the GL view's UIKit contentScaleFactor (CCARTACapGLViewBackingScale)
+//      so the framebuffer is at most 2048×1536. Otherwise a 13" iPad Pro
+//      simulator allocates ~5504×4128 and every animation is GPU-bound.
 //
 // Do NOT try to letterbox by setting director.view.frame alone — the director is
 // a UIViewController, and UIKit resets its view to fill the parent every layout.
@@ -75,6 +78,47 @@ const CGSize FIXED_SIZE = {568, 384};
 // ---------------------------------------------------------------------------
 static const CGSize kARTADesignSize = {1024.0, 768.0};
 static const CGFloat kARTAAspect = 4.0 / 3.0;
+/// Classic iPad retina. Assets and labels are authored for this; extra pixels
+/// on Pro-sized simulators/devices do not sharpen sprites, they just fill-rate.
+static const CGFloat kARTAMaxPixelScale = 2.0;
+
+void CCARTACapGLViewBackingScale(UIView *glView)
+{
+	if (glView == nil) {
+		return;
+	}
+
+	CGSize pointSize = glView.bounds.size;
+	if (pointSize.width <= 1.0 || pointSize.height <= 1.0) {
+		return;
+	}
+
+	UIScreen *screen = glView.window.screen ?: UIScreen.mainScreen;
+	CGFloat native = 0.0;
+	if ([screen respondsToSelector:@selector(nativeScale)]) {
+		native = screen.nativeScale;
+	}
+	if (native <= 0.0) {
+		native = screen.scale;
+	}
+	if (native <= 0.0) {
+		native = kARTAMaxPixelScale;
+	}
+
+	CGFloat maxViewScale = MIN(kARTAMaxPixelScale * kARTADesignSize.width / pointSize.width,
+							   kARTAMaxPixelScale * kARTADesignSize.height / pointSize.height);
+	CGFloat target = MIN(native, maxViewScale);
+	if (target < 0.5) {
+		target = 0.5;
+	}
+
+	if (fabs(glView.contentScaleFactor - target) > 0.01) {
+		NSLog(@"ARTA: GL view scale %.2f → %.2f (backing %.0f×%.0f, canvas 1024×768)",
+			  glView.contentScaleFactor, target,
+			  pointSize.width * target, pointSize.height * target);
+		glView.contentScaleFactor = target;
+	}
+}
 
 /// Largest 4:3 rect centered inside `bounds` (pillarbox or letterbox as needed).
 static CGRect CCARTAAspectFitRect(CGRect bounds)
@@ -152,6 +196,8 @@ static CGRect CCARTAAspectFitRect(CGRect bounds)
 	// against the 4:3 stage bounds in this same pass.
 	self.stageView.frame = CCARTAAspectFitRect(self.view.bounds);
 	self.contentViewController.view.frame = self.stageView.bounds;
+	// Cap before the GL view's layoutSubviews allocates the EAGL backing store.
+	CCARTACapGLViewBackingScale([CCDirector sharedDirector].view);
 }
 
 - (BOOL)prefersStatusBarHidden

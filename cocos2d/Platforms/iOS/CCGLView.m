@@ -83,8 +83,8 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 #import "CCDirector_Private.h"
 #import "CCRenderDispatch.h"
 
-
 extern EAGLContext *CCRenderDispatchSetupGL(EAGLRenderingAPI api, EAGLSharegroup *sharegroup);
+extern void CCARTACapGLViewBackingScale(UIView *glView);
 
 
 //CLASS IMPLEMENTATIONS:
@@ -367,6 +367,10 @@ extern EAGLContext *CCRenderDispatchSetupGL(EAGLRenderingAPI api, EAGLSharegroup
 
 - (void) layoutSubviews
 {
+	// ARTA: shrink the EAGL backing store *before* it is allocated. See
+	// CCARTACapGLViewBackingScale in CCAppDelegate.m.
+	CCARTACapGLViewBackingScale(self);
+
 	[self resizeFromLayer:(CAEAGLLayer*)self.layer];
     
 	// Issue #914 #924

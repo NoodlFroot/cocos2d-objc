@@ -115,4 +115,14 @@
 
 @end
 
+/** Cap the GL view's UIKit `contentScaleFactor` so the EAGL backing store stays at
+ most classic iPad retina (design 1024×768 × 2 = 2048×1536).
+
+ Must run from `CCGLView` `layoutSubviews` *before* `resizeFromLayer:` — that is
+ when the renderbuffer is allocated. On an iPad Pro 13" simulator the native
+ surface is ~5504×4128; leaving that uncapped makes every fade, menu, and dialog
+ crawl because GLES is Metal-translated at ~7× the original pixel count.
+ */
+void CCARTACapGLViewBackingScale(UIView *glView);
+
 #endif
