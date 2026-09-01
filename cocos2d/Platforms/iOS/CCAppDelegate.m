@@ -55,6 +55,7 @@ const CGSize FIXED_SIZE = {568, 384};
 //   3. Cap the GL view's UIKit contentScaleFactor (CCARTACapGLViewBackingScale)
 //      so the framebuffer is at most 2048×1536. Otherwise a 13" iPad Pro
 //      simulator allocates ~5504×4128 and every animation is GPU-bound.
+//      The simulator caps harder still (1024×768) — see ARTAMaxPixelScale.
 //
 // Do NOT try to letterbox by setting director.view.frame alone — the director is
 // a UIViewController, and UIKit resets its view to fill the parent every layout.
@@ -82,11 +83,35 @@ static const CGFloat kARTAAspect = 4.0 / 3.0;
 /// on Pro-sized simulators/devices do not sharpen sprites, they just fill-rate.
 static const CGFloat kARTAMaxPixelScale = 2.0;
 
+/// The simulator's GL ES driver costs roughly linearly per rasterized pixel, and
+/// far more per pixel than any real device: measured on an iPad Pro 11 (M5) sim,
+/// a 7-draw scene spends ~55ms in glDrawElements at 2048×1536 but ~14ms (a solid
+/// 60fps) at 1024×768. Nothing in the scene graph is at fault, so scenes with
+/// real overdraw (the layup) drop to single-digit fps for no reason that exists
+/// on device. Default the simulator to one pixel per canvas point; pass
+/// --sim-hidpi to get the device-accurate 2× surface back when checking visuals.
+static CGFloat ARTAMaxPixelScale(void)
+{
+#if TARGET_IPHONE_SIMULATOR
+	static CGFloat scale;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		BOOL hiDPI = [NSProcessInfo.processInfo.arguments containsObject:@"--sim-hidpi"];
+		scale = hiDPI ? kARTAMaxPixelScale : 1.0;
+	});
+	return scale;
+#else
+	return kARTAMaxPixelScale;
+#endif
+}
+
 void CCARTACapGLViewBackingScale(UIView *glView)
 {
 	if (glView == nil) {
 		return;
 	}
+
+	const CGFloat maxPixelScale = ARTAMaxPixelScale();
 
 	CGSize pointSize = glView.bounds.size;
 	if (pointSize.width <= 1.0 || pointSize.height <= 1.0) {
@@ -102,20 +127,20 @@ void CCARTACapGLViewBackingScale(UIView *glView)
 		native = screen.scale;
 	}
 	if (native <= 0.0) {
-		native = kARTAMaxPixelScale;
+		native = maxPixelScale;
 	}
 
-	CGFloat maxViewScale = MIN(kARTAMaxPixelScale * kARTADesignSize.width / pointSize.width,
-							   kARTAMaxPixelScale * kARTADesignSize.height / pointSize.height);
+	CGFloat maxViewScale = MIN(maxPixelScale * kARTADesignSize.width / pointSize.width,
+							   maxPixelScale * kARTADesignSize.height / pointSize.height);
 	CGFloat target = MIN(native, maxViewScale);
 	if (target < 0.5) {
 		target = 0.5;
 	}
 
 	if (fabs(glView.contentScaleFactor - target) > 0.01) {
-		NSLog(@"ARTA: GL view scale %.2f → %.2f (backing %.0f×%.0f, canvas 1024×768)",
+		NSLog(@"ARTA: GL view scale %.2f → %.2f (backing %.0f×%.0f, canvas 1024×768, max pixel scale %.1f)",
 			  glView.contentScaleFactor, target,
-			  pointSize.width * target, pointSize.height * target);
+			  pointSize.width * target, pointSize.height * target, maxPixelScale);
 		glView.contentScaleFactor = target;
 	}
 }
