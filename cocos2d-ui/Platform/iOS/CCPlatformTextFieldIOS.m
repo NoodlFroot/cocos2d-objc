@@ -27,14 +27,19 @@ NSString* const CCPlatformTextFieldIOSReturnPressedNotification = @"CCPlatformTe
         _textField.delegate = self;
         _textField.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
         
-        // UIKit might not be running in the same scale as us.
-        _scaleMultiplier = [CCDirector sharedDirector].contentScaleFactor/[UIScreen mainScreen].scale;
+        CGSize canvas = [CCDirector sharedDirector].viewSize;
+        CGSize ui = [CCDirector sharedDirector].view.bounds.size;
+        _scaleMultiplier = (canvas.width > 0.0 && ui.width > 0.0) ? (ui.width / canvas.width) : 1.0;
         
     }
     return self;
 }
 
 - (void) positionInControl:(CCControl *)control padding:(CGFloat)padding {
+    CGSize canvas = [CCDirector sharedDirector].viewSize;
+    CGSize ui = [CCDirector sharedDirector].view.bounds.size;
+    _scaleMultiplier = (canvas.width > 0.0 && ui.width > 0.0) ? (ui.width / canvas.width) : 1.0;
+
     CGPoint worldPos = [control convertToWorldSpace:CGPointZero];
     CGPoint viewPos = [[CCDirector sharedDirector] convertToUI:worldPos];
     viewPos.x += padding;

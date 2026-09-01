@@ -918,16 +918,27 @@ static const float CCFPSLabelItemHeight = 32;
 	_accumDt += _dt;
 
 	if( _displayStats ) {
-		// Ms per Frame
+		// Wall-clock FPS. DEBUG clamps _dt at 0.2s so a blocked main thread
+		// still reported 60fps; measure elapsed time instead.
+		static struct timeval sStatsWall;
+		static BOOL sHaveStatsWall = NO;
+		struct timeval now;
+		gettimeofday(&now, NULL);
+		if (!sHaveStatsWall) {
+			sStatsWall = now;
+			sHaveStatsWall = YES;
+		}
+		CCTime wallDt = (now.tv_sec - sStatsWall.tv_sec) + (now.tv_usec - sStatsWall.tv_usec) / 1000000.0;
 
-		if( _accumDt > CC_DIRECTOR_STATS_INTERVAL)
+		if( wallDt > CC_DIRECTOR_STATS_INTERVAL)
 		{
 			NSString *spfstr = [[NSString alloc] initWithFormat:@"%.3f", _secondsPerFrame];
 			[_SPFLabel setString:spfstr];
 
-			_frameRate = _frames/_accumDt;
+			_frameRate = _frames / MAX(wallDt, 0.0001);
 			_frames = 0;
 			_accumDt = 0;
+			sStatsWall = now;
 
 //			sprintf(format,"%.1f",frameRate);
 //			[FPSLabel setCString:format];
